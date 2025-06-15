@@ -1,55 +1,47 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { validateRegistrationForm } from "../utils/validateRegistrationForm";
 import { RegisterCard } from "../components/form/RegisterCard";
 import { toast } from "react-hot-toast";
+import { loginWithGoogle, register } from "../services/authServices";
 
 export default function Register() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [photoURL, setPhotoURL] = useState("");
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+    const validationResult = validateRegistrationForm(name, email, password);
 
-    if (!name.trim() || !email.trim()) {
-      toast.error("Name and email are required.");
+    if (!validationResult.valid) {
+      toast.error(validationResult.message);
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      toast.error("Enter a valid email address.");
-      return;
+    try {
+      await register(email, password, name, photoURL);
+      toast.success("Registered successfully!");
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message);
     }
-
-    const uppercaseRegex = /[A-Z]/;
-    const lowercaseRegex = /[a-z]/;
-
-    if (password.length < 6) {
-      toast.error("Password must be at least 6 characters long.");
-      return;
-    }
-    if (!uppercaseRegex.test(password)) {
-      toast.error("Password must contain at least one uppercase letter.");
-      return;
-    }
-    if (!lowercaseRegex.test(password)) {
-      toast.error("Password must contain at least one lowercase letter.");
-      return;
-    }
-
-    console.log({
-      name,
-      email,
-      password,
-      photoURL,
-    });
-
-    toast.success("Registration successful!");
+    setName("");
+    setEmail("");
+    setPassword("");
+    setPhotoURL("");
   };
 
-  const handleGoogleRegister = () => {
-    toast("Google registration not implemented yet.");
+  const handleGoogleRegister = async () => {
+    try {
+      await loginWithGoogle();
+      toast.success("Logged in successfully!");
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (

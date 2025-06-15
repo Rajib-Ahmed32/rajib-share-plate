@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { Card, CardContent } from "../ui/card";
+import { RegisterForm } from "./RegisterForm";
 export function RegisterCard({
   name,
   email,

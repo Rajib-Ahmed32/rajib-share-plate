@@ -10,6 +10,9 @@ export function AuthInput({
   onChange,
   icon,
   required = false,
+  autoComplete,
+  className = "",
+  ...rest
 }) {
   return (
     <div className="space-y-2">
@@ -27,7 +30,9 @@ export function AuthInput({
           value={value}
           onChange={onChange}
           required={required}
-          className="w-full pl-10 border border-white text-white bg-input placeholder-muted-foreground focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-2 rounded-md"
+          autoComplete={autoComplete}
+          className={`w-full pl-10 border border-white text-white bg-input placeholder-muted-foreground focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-2 rounded-md ${className}`}
+          {...rest}
         />
       </div>
     </div>

@@ -12,6 +12,7 @@ export function RegisterCard({
   onPhotoURLChange,
   onSubmit,
   onGoogleRegister,
+  loading,
 }) {
   return (
     <div className="flex justify-center items-center min-h-screen bg-background transition-colors p-4">
@@ -32,6 +33,7 @@ export function RegisterCard({
             onPhotoURLChange={onPhotoURLChange}
             onSubmit={onSubmit}
             onGoogleRegister={onGoogleRegister}
+            loading={loading}
           />
 
           <p className="text-center text-sm text-foreground dark:text-gray-300">

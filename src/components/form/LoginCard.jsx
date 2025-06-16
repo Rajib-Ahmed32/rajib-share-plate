@@ -10,6 +10,7 @@ export function LoginCard({
   onPasswordChange,
   onSubmit,
   onGoogleLogin,
+  loading,
 }) {
   return (
     <div className="flex justify-center items-center min-h-screen bg-background transition-colors p-4">
@@ -24,6 +25,7 @@ export function LoginCard({
             onPasswordChange={onPasswordChange}
             onSubmit={onSubmit}
             onGoogleLogin={onGoogleLogin}
+            loading={loading}
           />
 
           <p className="text-center text-sm text-foreground dark:text-gray-300">

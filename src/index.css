@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,7 +36,7 @@
     --chart-1: 80 57% 51%;
     --chart-2: 197 37% 24%;
     --chart-3: 43 74% 66%;
-    --chart-4: 27 87% 67%;
+    --chart-4: 26.9 94.9% 61.8%;
     --chart-5: 12 76% 61%;
 
     --radius: 0.5rem;
@@ -84,4 +85,14 @@ input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 1000px #1f2937 inset !important;
   -webkit-text-fill-color: white !important;
   transition: background-color 5000s ease-in-out 0s;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Lora", serif;
 }

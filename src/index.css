@@ -96,3 +96,7 @@ h2,
 h3 {
   font-family: "Lora", serif;
 }
+
+a.active {
+  color: hsl(var(--primary));
+}

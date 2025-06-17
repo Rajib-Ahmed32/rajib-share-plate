@@ -1,13 +1,33 @@
 import Logo from "../ui/Logo";
+import { logout } from "../../services/authServices";
+import { NavLink } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Button } from "../ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
 } from "../ui/navigation-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 import AuthButtons from "../../components/header/AuthButtons";
 
-export default function DesktopNav({ mainMenu, authMenu }) {
+export default function DesktopNav({ mainMenu, authMenu, user }) {
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success("Logged out successfully!");
+    } catch (error) {
+      toast.error("Logout failed");
+      console.error(error);
+    }
+  };
+
   return (
     <nav className="hidden justify-between lg:flex items-center">
       <Logo />
@@ -16,18 +36,46 @@ export default function DesktopNav({ mainMenu, authMenu }) {
           <NavigationMenuList>
             {mainMenu.map((item) => (
               <NavigationMenuItem key={item.title}>
-                <NavigationMenuLink
-                  href={item.url}
-                  className="group text-foreground inline-flex h-10 items-center justify-center rounded-md px-2.5 text-sm font-medium hover:text-primary transition-colors duration-200"
-                >
-                  {item.title}
+                <NavigationMenuLink asChild>
+                  <NavLink
+                    to={item.url}
+                    className="group text-foreground inline-flex h-10 items-center justify-center rounded-md px-2.5 text-sm font-medium hover:text-primary transition-colors duration-200"
+                  >
+                    {item.title}
+                  </NavLink>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
         </NavigationMenu>
       </div>
-      <AuthButtons authMenu={authMenu} />
+
+      {user?.displayName ? (
+        <div className="flex items-center gap-7">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <img
+                  src={user.photoURL}
+                  alt={user.displayName}
+                  className="w-9 h-9 rounded-full border border-white cursor-pointer"
+                />
+              </TooltipTrigger>
+              <TooltipContent className="text-md">
+                <p className="font-medium">{user.displayName}</p>
+                <p className="text-xs text-gray-400 mt-1">{user.email}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <Button onClick={handleLogout} variant="destructive">
+            Logout
+          </Button>
+        </div>
+      ) : (
+        <div className="">
+          <AuthButtons authMenu={authMenu} className="hidden md:flex" />
+        </div>
+      )}
     </nav>
   );
 }

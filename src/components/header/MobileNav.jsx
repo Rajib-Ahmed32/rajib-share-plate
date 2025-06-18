@@ -2,6 +2,7 @@ import { Menu } from "lucide-react";
 import { Button } from "../ui/button";
 import { NavLink } from "react-router-dom";
 import { logout } from "../../services/authServices";
+import toast from "react-hot-toast";
 import {
   Sheet,
   SheetContent,
@@ -19,12 +20,15 @@ import {
 import AuthButtons from "../../components/header/AuthButtons";
 import Logo from "../ui/Logo";
 import LogoSecond from "../ui/LogoSecond";
+import { useNavigate } from "react-router-dom";
 
 export default function MobileNav({ mainMenu, authMenu, user }) {
+  const navigate = useNavigate();
   const handleLogout = async () => {
     try {
       await logout();
       toast.success("Logged out successfully!");
+      navigate("/");
     } catch (error) {
       toast.error("Logout failed");
       console.error(error);

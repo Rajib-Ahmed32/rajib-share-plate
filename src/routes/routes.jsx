@@ -11,6 +11,7 @@ import Register from "../pages/Register";
 import FoodDetails from "../pages/FoodDetails";
 import UpdateFood from "../pages/UpdateFood";
 import NotFound from "../pages/NotFound";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -19,14 +20,57 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/available-foods", element: <AvailableFoods /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
-      { path: "/add-food", element: <AddFood /> },
-      { path: "/manage-foods", element: <ManageFoods /> },
-      { path: "/my-requests", element: <MyFoodRequests /> },
-      { path: "/food/:id", element: <FoodDetails /> },
-      { path: "/update-food/:id", element: <UpdateFood /> },
+      //Protected Routes
+      {
+        path: "/available-foods",
+        element: (
+          <PrivateRoute>
+            <AvailableFoods />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/add-food",
+        element: (
+          <PrivateRoute>
+            <AddFood />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/manage-foods",
+        element: (
+          <PrivateRoute>
+            <ManageFoods />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-requests",
+        element: (
+          <PrivateRoute>
+            <MyFoodRequests />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/food/:id",
+        element: (
+          <PrivateRoute>
+            <FoodDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update-food/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateFood />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);

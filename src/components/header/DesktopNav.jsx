@@ -1,5 +1,6 @@
 import Logo from "../ui/Logo";
 import { logout } from "../../services/authServices";
+import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Button } from "../ui/button";
@@ -18,10 +19,12 @@ import {
 import AuthButtons from "../../components/header/AuthButtons";
 
 export default function DesktopNav({ mainMenu, authMenu, user }) {
+  const navigate = useNavigate();
   const handleLogout = async () => {
     try {
       await logout();
       toast.success("Logged out successfully!");
+      navigate("/");
     } catch (error) {
       toast.error("Logout failed");
       console.error(error);

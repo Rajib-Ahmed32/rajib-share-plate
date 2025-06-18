@@ -16,13 +16,18 @@ export default function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    const validationResult = validateRegistrationForm(name, email, password);
+    const validationResult = validateRegistrationForm(
+      name,
+      email,
+      password,
+      photoURL
+    );
 
     if (!validationResult.valid) {
       toast.error(validationResult.message);
       return;
     }
-
+    console.log("Photo URL value before validation:", photoURL);
     try {
       setLoading(true);
       await register(email, password, name, photoURL);

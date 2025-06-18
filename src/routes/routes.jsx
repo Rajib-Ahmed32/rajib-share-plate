@@ -22,15 +22,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
-      //Protected Routes
-      {
-        path: "/available-foods",
-        element: (
-          <PrivateRoute>
-            <AvailableFoods />
-          </PrivateRoute>
-        ),
-      },
+      { path: "/available-foods", element: <AvailableFoods /> },
       {
         path: "/add-food",
         element: (

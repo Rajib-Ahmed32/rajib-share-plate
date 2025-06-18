@@ -1,6 +1,6 @@
-export const validateRegistrationForm = (name, email, password) => {
-  if (!name.trim() || !email.trim()) {
-    return { valid: false, message: "Name and email are required." };
+export const validateRegistrationForm = (name, email, password, photoURL) => {
+  if (!name.trim() || !email.trim() || !photoURL.trim()) {
+    return { valid: false, message: "Name, email and photURL are required." };
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

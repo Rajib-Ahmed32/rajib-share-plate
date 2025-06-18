@@ -60,6 +60,7 @@ export function RegisterForm({
           onChange={onPhotoURLChange}
           icon={<ImageIcon className="w-4 h-4 text-white" />}
           autoComplete="off"
+          required
         />
 
         <div className="relative w-full">

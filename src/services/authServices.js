@@ -6,6 +6,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth, googleProvider } from "../firebase/firebase.config";
+import { sendTokenToBackend } from "./jwtService";
 
 export const register = async (email, password, name, photoURL) => {
   const userCredentials = await createUserWithEmailAndPassword(
@@ -13,13 +14,37 @@ export const register = async (email, password, name, photoURL) => {
     email,
     password
   );
-  await updateProfile(userCredentials.user, { displayName: name, photoURL });
+
+  await updateProfile(userCredentials.user, {
+    displayName: name,
+    photoURL,
+  });
+
+  const firebaseIdToken = await userCredentials.user.getIdToken();
+  await sendTokenToBackend(firebaseIdToken);
   return userCredentials;
 };
 
-export const login = (email, password) =>
-  signInWithEmailAndPassword(auth, email, password);
+export const login = async (email, password) => {
+  const userCredentials = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
 
-export const logout = () => signOut(auth);
+  const firebaseIdToken = await userCredentials.user.getIdToken();
+  await sendTokenToBackend(firebaseIdToken);
+  return userCredentials;
+};
 
-export const loginWithGoogle = () => signInWithPopup(auth, googleProvider);
+export const logout = async () => {
+  await signOut(auth);
+  localStorage.removeItem("access-token");
+};
+
+export const loginWithGoogle = async () => {
+  const userCredentials = await signInWithPopup(auth, googleProvider);
+  const firebaseIdToken = await userCredentials.user.getIdToken();
+  await sendTokenToBackend(firebaseIdToken);
+  return userCredentials;
+};

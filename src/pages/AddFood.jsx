@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Card, CardContent } from "../components/ui/card";
 import AddFoodForm from "../components/form/AddFoodForm";
 import { useAuth } from "../context/AuthContext";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function AddFood() {
   const { user } = useAuth();
@@ -19,18 +21,44 @@ export default function AddFood() {
     setFormData({ ...formData, [field]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newFood = {
-      ...formData,
+      foodName: formData.foodName,
+      foodImage: formData.foodImage,
+      foodQuantity: formData.quantity,
+      pickupLocation: formData.location,
+      expiredAt: formData.expiredAt,
+      additionalNotes: formData.notes,
       status: "available",
       donorName: user?.displayName,
       donorEmail: user?.email,
       donorImage: user?.photoURL,
     };
 
-    console.log("Submitting food:", newFood);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/foods",
+        newFood
+      );
+      toast.success("Food added successfully");
+      console.log("Food added successfully:", response.data);
+      setFormData({
+        foodName: "",
+        foodImage: "",
+        quantity: "",
+        location: "",
+        expiredAt: "",
+        notes: "",
+      });
+    } catch (error) {
+      toast.error("Failed to add food");
+      console.error(
+        "Failed to add food:",
+        error.response?.data || error.message
+      );
+    }
   };
 
   return (

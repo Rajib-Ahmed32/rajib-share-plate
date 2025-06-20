@@ -38,9 +38,15 @@ export default function AddFood() {
     };
 
     try {
+      const token = localStorage.getItem("access-token");
       const response = await axios.post(
         "http://localhost:5000/api/foods",
-        newFood
+        newFood,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       toast.success("Food added successfully");
       console.log("Food added successfully:", response.data);

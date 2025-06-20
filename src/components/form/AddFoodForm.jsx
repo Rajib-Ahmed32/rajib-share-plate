@@ -69,8 +69,8 @@ export default function AddFoodForm({
 
         <FormInputWithIcon
           id="expiredAt"
-          label="Expiry Date/Time"
-          type="datetime-local"
+          label="Expiry Date"
+          type="date"
           icon={<CalendarDays className="w-4 h-4" />}
           value={expiredAt}
           onChange={onChange("expiredAt")}

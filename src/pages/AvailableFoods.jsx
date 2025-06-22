@@ -46,8 +46,8 @@ export default function AvailableFoods() {
 
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-extrabold text-foreground">
+      <div className="flex flex-col md:flex-row items-center justify-between">
+        <h1 className="text-3xl mb-8 md:mb-0 font-extrabold text-foreground">
           Available Foods
         </h1>
         <div className="w-52">

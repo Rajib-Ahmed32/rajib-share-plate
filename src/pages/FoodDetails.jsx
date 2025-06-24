@@ -58,6 +58,7 @@ const FoodDetails = () => {
           },
         }
       );
+      console.log(res.data);
       toast.dismiss();
       toast.success("Food requested successfully!");
       setSingleFood(res.data);

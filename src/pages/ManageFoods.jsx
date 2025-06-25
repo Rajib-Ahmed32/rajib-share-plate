@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 import { Card } from "../components/ui/card";
 import Loading from "../components/ui/Loading";
 import EditModal from "../components/manage-page/EditModal";
@@ -43,9 +44,20 @@ export default function ManageFoods() {
   const handleEdit = (food) => setEditFood(food);
   const handleUpdate = (data) => updateMutation.mutate(data);
   const handleDelete = (id) => {
-    if (confirm("Are you sure you want to delete this food?")) {
-      deleteMutation.mutate(id);
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This food will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteMutation.mutate(id);
+        Swal.fire("Deleted!", "The food has been deleted.", "success");
+      }
+    });
   };
 
   return (
@@ -54,7 +66,7 @@ export default function ManageFoods() {
         Manage My Foods
       </h1>
 
-      <Card className="p-6">
+      <Card className="p-5 md:p-10 shadow-lg rounded-md">
         {isLoading ? (
           <Loading />
         ) : isError ? (

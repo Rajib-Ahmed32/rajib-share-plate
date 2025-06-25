@@ -10,8 +10,8 @@ import FoodTableRow from "../manage-page/FoodTableRow";
 
 export default function FoodTable({ foods, onEdit, onDelete, isDeleting }) {
   return (
-    <div className="overflow-auto">
-      <Table>
+    <div className="w-full overflow-x-auto md:overflow-x-auto">
+      <Table className="min-w-[900px]">
         <TableHeader>
           <TableRow>
             <TableHead>Image</TableHead>

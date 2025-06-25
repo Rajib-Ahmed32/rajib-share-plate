@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Card, CardContent } from "../components/ui/card";
+import { getFreshToken } from "../services/authUtils";
 import AddFoodForm from "../components/form/AddFoodForm";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
@@ -38,7 +39,7 @@ export default function AddFood() {
     };
 
     try {
-      const token = localStorage.getItem("access-token");
+      const token = await getFreshToken();
       const response = await axios.post(
         "http://localhost:5000/api/foods",
         newFood,
@@ -69,9 +70,9 @@ export default function AddFood() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-background px-4">
-      <Card className="w-full max-w-2xl shadow-lg bg-card">
-        <CardContent className="p-8 space-y-8">
-          <h2 className="text-2xl font-bold text-center text-primary">
+      <Card className="w-full max-w-4xl shadow-xl bg-card rounded-lg">
+        <CardContent className="p-10 space-y-10">
+          <h2 className="text-3xl font-bold text-center text-primary">
             Add Food
           </h2>
           <AddFoodForm

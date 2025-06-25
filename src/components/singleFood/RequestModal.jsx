@@ -30,114 +30,120 @@ export default function RequestModal({ food, user, onClose, onSubmit }) {
     }
   }, [food]);
 
-  const halfPxBorderStyle = { border: "0.5px solid white" };
-
   return (
     <Dialog open onOpenChange={onClose}>
-      <DialogContent className="w-full max-w-4xl text-white">
+      <DialogContent className="w-full max-w-3xl text-white">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl text-primary">
             Request This Food
           </DialogTitle>
         </DialogHeader>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-4 max-h-[700px] overflow-y-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-4 max-h-[600px] overflow-y-auto">
           <div className="grid gap-4">
             <div className="grid gap-1">
-              <Label className="text-white">Food Name</Label>
+              <Label className="text-sm text-muted-foreground">Food Name</Label>
               <Input
                 disabled
                 value={food.foodName}
-                className="text-white"
-                style={halfPxBorderStyle}
+                className="text-white px-3 py-2 bg-background border border-white/30"
               />
             </div>
             <div className="grid gap-1">
-              <Label className="text-white">Food ID</Label>
+              <Label className="text-sm text-muted-foreground">Food ID</Label>
               <Input
                 disabled
                 value={food._id}
-                className="text-white"
-                style={halfPxBorderStyle}
+                className="text-white px-3 py-2 bg-background border border-white/30"
               />
             </div>
             <div className="grid gap-1">
-              <Label className="text-white">Food Image</Label>
+              <Label className="text-sm text-muted-foreground">
+                Food Image
+              </Label>
               <Input
                 disabled
                 value={food.foodImage}
-                className="text-white"
-                style={halfPxBorderStyle}
+                className="text-white px-3 py-2 bg-background border border-white/30"
               />
             </div>
             <div className="grid gap-1">
-              <Label className="text-white">Donator Email</Label>
+              <Label className="text-sm text-muted-foreground">
+                Donator Email
+              </Label>
               <Input
                 disabled
                 value={food.donorEmail}
-                className="text-white"
-                style={halfPxBorderStyle}
+                className="text-white px-3 py-2 bg-background border border-white/30"
               />
             </div>
             <div className="grid gap-1">
-              <Label className="text-white">Donator Name</Label>
+              <Label className="text-sm text-muted-foreground">
+                Donator Name
+              </Label>
               <Input
                 disabled
                 value={food.donorName}
-                className="text-white"
-                style={halfPxBorderStyle}
+                className="text-white px-3 py-2 bg-background border border-white/30"
               />
             </div>
           </div>
+
           <div className="grid gap-4">
             <div className="grid gap-1">
-              <Label className="text-white">Your Email</Label>
+              <Label className="text-sm text-muted-foreground">
+                Your Email
+              </Label>
               <Input
                 disabled
                 value={user.email}
-                className="text-white"
-                style={halfPxBorderStyle}
+                className="text-white px-3 py-2 bg-background border border-white/30"
               />
             </div>
             <div className="grid gap-1">
-              <Label className="text-white">Request Date</Label>
+              <Label className="text-sm text-muted-foreground">
+                Request Date
+              </Label>
               <Input
                 disabled
                 value={new Date().toLocaleString()}
-                className="text-white"
-                style={halfPxBorderStyle}
+                className="text-white px-3 py-2 bg-background border border-white/30"
               />
             </div>
             <div className="grid gap-1">
-              <Label className="text-white">Pickup Location</Label>
+              <Label className="text-sm text-muted-foreground">
+                Pickup Location
+              </Label>
               <Input
                 disabled
                 value={food.pickupLocation}
-                className="text-white"
-                style={halfPxBorderStyle}
+                className="text-white px-3 py-2 bg-background border border-white/30"
               />
             </div>
             <div className="grid gap-1">
-              <Label className="text-white">Expire Date</Label>
+              <Label className="text-sm text-muted-foreground">
+                Expire Date
+              </Label>
               <Input
                 disabled
                 value={new Date(food.expiredAt).toLocaleDateString()}
-                className="text-white"
-                style={halfPxBorderStyle}
+                className="text-white px-3 py-2 bg-background border border-white/30"
               />
             </div>
             <div className="grid gap-1">
-              <Label className="text-white">Additional Notes (editable)</Label>
+              <Label className="text-sm text-muted-foreground">
+                Additional Notes (editable)
+              </Label>
               <Input
                 placeholder="Write any message..."
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="text-white"
-                style={halfPxBorderStyle}
+                className="text-white px-3 py-2 bg-background border border-white/30"
               />
             </div>
           </div>
         </div>
+
         <div className="flex justify-center mt-4">
           <Button
             variant="outline"

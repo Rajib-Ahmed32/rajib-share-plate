@@ -1,4 +1,3 @@
-// src/Routes.jsx
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home";
@@ -9,7 +8,6 @@ import MyFoodRequests from "../pages/MyFoodRequests";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import FoodDetails from "../pages/FoodDetails";
-import UpdateFood from "../pages/UpdateFood";
 import NotFound from "../pages/NotFound";
 import PrivateRoute from "./PrivateRoute";
 
@@ -52,14 +50,6 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <FoodDetails />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/update-food/:id",
-        element: (
-          <PrivateRoute>
-            <UpdateFood />
           </PrivateRoute>
         ),
       },

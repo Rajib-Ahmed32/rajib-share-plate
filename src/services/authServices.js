@@ -20,7 +20,7 @@ export const register = async (email, password, name, photoURL) => {
     photoURL,
   });
 
-  const firebaseIdToken = await userCredentials.user.getIdToken();
+  const firebaseIdToken = await userCredentials.user.getIdToken(true);
   await sendTokenToBackend(firebaseIdToken);
   return userCredentials;
 };
@@ -32,7 +32,7 @@ export const login = async (email, password) => {
     password
   );
 
-  const firebaseIdToken = await userCredentials.user.getIdToken();
+  const firebaseIdToken = await userCredentials.user.getIdToken(true);
   await sendTokenToBackend(firebaseIdToken);
   return userCredentials;
 };
@@ -44,7 +44,7 @@ export const logout = async () => {
 
 export const loginWithGoogle = async () => {
   const userCredentials = await signInWithPopup(auth, googleProvider);
-  const firebaseIdToken = await userCredentials.user.getIdToken();
+  const firebaseIdToken = await userCredentials.user.getIdToken(true);
   await sendTokenToBackend(firebaseIdToken);
   return userCredentials;
 };

@@ -3,47 +3,57 @@ import { Badge } from "../ui/badge";
 
 export default function FoodInfo({ food }) {
   return (
-    <>
-      <img
-        src={food.foodImage}
-        alt={food.foodName}
-        className="w-full h-64 object-cover rounded-lg border"
-        onError={(e) => {
-          e.currentTarget.onerror = null;
-          e.currentTarget.src =
-            "https://previews.123rf.com/images/srijianti/srijianti1705/srijianti170519335/78984685-food-text-for-title-or-headline-in-3d-fancy-fun-and-futuristic-style.jpg";
-        }}
-      />
+    <div className="space-y-8">
+      <div className="overflow-hidden rounded-xl border shadow-sm">
+        <img
+          src={food.foodImage}
+          alt={food.foodName}
+          className="w-full h-64 object-cover"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = "/food-3.avif";
+          }}
+        />
+      </div>
+      <div className="text-center space-y-4">
+        <h1 className="text-3xl font-extrabold text-foreground tracking-tight">
+          {food.foodName}
+        </h1>
 
-      <div className="space-y-2">
-        <h1 className="text-2xl font-bold">{food.foodName}</h1>
-        <p className="text-sm text-muted-foreground">{food.additionalNotes}</p>
-
-        <div className="flex gap-4 flex-wrap text-sm text-muted-foreground mt-4">
-          <span className="flex items-center gap-1">
+        {food.additionalNotes && (
+          <p className="text-sm text-muted-foreground max-w-xl mx-auto">
+            {food.additionalNotes}
+          </p>
+        )}
+        <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2">
             <MapPin className="w-4 h-4 text-primary" />
-            {food.pickupLocation}
-          </span>
+            <span>{food.pickupLocation}</span>
+          </div>
 
-          <span className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <Clock className="w-4 h-4 text-primary" />
-            Expires: {new Date(food.expiredAt).toLocaleDateString()}
-          </span>
+            <span>
+              Expires: {new Date(food.expiredAt).toLocaleDateString()}
+            </span>
+          </div>
 
-          <span className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-primary" />
-            Created: {new Date(food.createdAt).toLocaleDateString()}
-          </span>
-
-          <Badge className="bg-green-100 text-green-700">
+            <span>
+              Created: {new Date(food.createdAt).toLocaleDateString()}
+            </span>
+          </div>
+        </div>
+        <div className="flex justify-center gap-3 pt-2 flex-wrap">
+          <Badge className="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full shadow-sm">
             Status: {food.foodStatus}
           </Badge>
-
-          <Badge className="bg-blue-100 text-blue-700">
+          <Badge className="bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full shadow-sm">
             Quantity: {food.foodQuantity}
           </Badge>
         </div>
       </div>
-    </>
+    </div>
   );
 }

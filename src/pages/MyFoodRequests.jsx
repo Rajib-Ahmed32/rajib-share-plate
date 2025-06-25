@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import NoDataMessage from "../components/error/NoDataMessage";
+import { getFreshToken } from "../services/authUtils";
 import RequestCard from "../components/request-card/RequestCard";
+import Loading from "../components/ui/Loading";
 
 export default function MyFoodRequests() {
   const [requests, setRequests] = useState([]);
@@ -9,7 +12,7 @@ export default function MyFoodRequests() {
 
   useEffect(() => {
     const fetchRequests = async () => {
-      const token = localStorage.getItem("access-token");
+      const token = await getFreshToken();
       try {
         const res = await axios.get(
           "http://localhost:5000/api/foods/request/me",
@@ -31,8 +34,7 @@ export default function MyFoodRequests() {
     fetchRequests();
   }, []);
 
-  if (loading)
-    return <p className="text-center p-10">Loading your requests...</p>;
+  if (loading) return <Loading />;
   if (error) return <p className="text-center p-10 text-red-600">{error}</p>;
 
   return (
@@ -42,11 +44,9 @@ export default function MyFoodRequests() {
       </h1>
 
       {requests.length === 0 ? (
-        <p className="text-center text-muted-foreground">
-          You have no food requests yet.
-        </p>
+        <NoDataMessage message="You have no food requests yet." />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid gap-6 grid-cols-1 md:[grid-template-columns:repeat(auto-fill,minmax(450px,1fr))]">
           {requests.map((food) => (
             <RequestCard key={food._id} food={food} />
           ))}

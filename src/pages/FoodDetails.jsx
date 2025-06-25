@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { getFreshToken } from "../services/authUtils";
 import axios from "axios";
 import { Card } from "../components/ui/card";
 import FoodInfo from "../components/singleFood/FoodInfo";
@@ -18,7 +19,7 @@ const FoodDetails = () => {
 
   useEffect(() => {
     const fetchFood = async () => {
-      const token = localStorage.getItem("access-token");
+      const token = await getFreshToken();
       try {
         setLoading(true);
         const { data } = await axios.get(
@@ -41,7 +42,7 @@ const FoodDetails = () => {
   }, [params.id]);
 
   const handleRequest = async (requestData) => {
-    const token = localStorage.getItem("access-token");
+    const token = await getFreshToken();
     try {
       toast.loading("Submitting request...");
       const res = await axios.patch(

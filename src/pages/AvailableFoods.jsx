@@ -1,6 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useState } from "react";
 import FoodCard from "../components/ui/FoodCard";
+import Loading from "../components/ui/Loading";
+import ErrorMessage from "../components/error/ErrorMessage";
 import {
   Select,
   SelectContent,
@@ -8,11 +11,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
-import { useState } from "react";
-import Loading from "../components/ui/Loading";
+import { Input } from "../components/ui/input";
 
 export default function AvailableFoods() {
   const [sortOrder, setSortOrder] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const {
     data: availableFoods = [],
@@ -21,12 +24,8 @@ export default function AvailableFoods() {
   } = useQuery({
     queryKey: ["availableFoods"],
     queryFn: async () => {
-      const token = localStorage.getItem("access-token");
       const response = await axios.get(
-        "http://localhost:5000/api/available-foods",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        "http://localhost:5000/api/available-foods"
       );
       return response.data;
     },
@@ -42,22 +41,40 @@ export default function AvailableFoods() {
       : 0;
   });
 
-  const foodsToShow = sortOrder ? sortedFoods : availableFoods;
+  const filteredFoods = sortedFoods.filter((food) =>
+    [food.foodName, food.pickupLocation, food.donorName]
+      .join(" ")
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8">
-      <div className="flex flex-col md:flex-row items-center justify-between">
-        <h1 className="text-3xl mb-8 md:mb-0 font-extrabold text-foreground">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        <h1 className="text-3xl mb-3 font-extrabold text-primary">
           Available Foods
         </h1>
-        <div className="w-52">
+
+        <div className="flex items-center gap-3">
+          <Input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search Food"
+            className="px-4 text-white py-2 rounded border-2 border-input text-sm w-full md:w-64"
+          />
+
           <Select onValueChange={(value) => setSortOrder(value)}>
-            <SelectTrigger className="text-white">
-              <SelectValue placeholder="Sort by Expiry" />
+            <SelectTrigger className="w-30 md:w-52 border-2 text-white">
+              <SelectValue placeholder="Sort: Soon or Later" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="asc">Expiry Date: Ascending</SelectItem>
-              <SelectItem value="desc">Expiry Date: Descending</SelectItem>
+              <SelectItem value="asc">
+                <span>Expiring Soon</span>
+              </SelectItem>
+              <SelectItem value="desc">
+                <span>Expires Later</span>
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -66,14 +83,14 @@ export default function AvailableFoods() {
       {isLoading ? (
         <Loading />
       ) : isError ? (
-        <p className="text-center text-red-500">Failed to load foods.</p>
-      ) : foodsToShow.length === 0 ? (
+        <ErrorMessage message="Failed to load available foods." />
+      ) : filteredFoods.length === 0 ? (
         <p className="text-center text-muted-foreground text-lg mt-20">
-          No available foods found.
+          No matching foods found.
         </p>
       ) : (
-        <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {foodsToShow.map((food) => (
+        <div className="grid gap-10 md:grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))]">
+          {filteredFoods.map((food) => (
             <FoodCard key={food._id} food={food} />
           ))}
         </div>

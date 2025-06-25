@@ -12,7 +12,7 @@ const App = () => {
   return (
     <div>
       <Header />
-      <main className="min-h-screen py-5 md:py-10 bg-background">
+      <main className="min-h-screen bg-background">
         <Outlet />
       </main>
       <Footer />

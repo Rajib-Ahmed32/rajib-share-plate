@@ -100,3 +100,7 @@ h3 {
 a.active {
   color: hsl(var(--primary));
 }
+
+.banner-heading {
+  font-family: "Inter", sans-serif;
+}

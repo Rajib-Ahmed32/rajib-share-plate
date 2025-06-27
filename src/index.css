@@ -104,3 +104,20 @@ a.active {
 .banner-heading {
   font-family: "Inter", sans-serif;
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #c6650c;
+  transition: color 0.3s ease;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #e07a2f;
+}

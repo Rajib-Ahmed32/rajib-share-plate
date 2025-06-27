@@ -17,7 +17,7 @@ export default function BannerSection() {
               <span className="text-white block">Support Needy</span>
               <span className="text-white block">Reduce Food Waste</span>
             </h1>
-            <p className="mt-5 text-sm md:text-lg text-gray-100 max-w-md leading-relaxed">
+            <p className="mt-5 text-base md:text-lg text-gray-50/80 max-w-md leading-relaxed">
               Connect with your neighbors to share extra food, reduce waste, and
               ensure no meal goes to waste. Join the movement toward a more
               sustainable and caring community.

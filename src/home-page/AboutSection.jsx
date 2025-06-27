@@ -4,10 +4,10 @@ export default function AboutSection() {
       <div className="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 px-5 md:px-0 md:grid-cols-2 items-center gap-8">
           <div className="max-w-lg">
-            <h2 className="text-3xl font-extrabold text-primary sm:text-4xl">
+            <h2 className="text-3xl font-extrabold text-primary ">
               About Our Community
             </h2>
-            <p className="mt-4 text-gray-100 text-lg leading-relaxed">
+            <p className="mt-5 text-base md:text-lg text-gray-50/80 max-w-md leading-relaxed">
               We believe in building a caring community by sharing surplus food
               and supporting those in need. Our platform connects neighbors to
               reduce food waste and ensure that no meal goes to waste. Join us

@@ -26,7 +26,7 @@ export default function FoodTableRow({ food, onEdit, onDelete, isDeleting }) {
       <TableCell className="p-3 text-center space-x-3">
         <Button
           size="sm"
-          className="text-black font-extrabold"
+          className="text-white font-bold"
           onClick={() => onEdit(food)}
         >
           Edit

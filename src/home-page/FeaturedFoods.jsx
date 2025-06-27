@@ -32,7 +32,7 @@ export default function FeaturedFoods() {
     <div className="bg-[#24252d] py-8 md:py-10">
       <section className="p-8 w-full max-w-7xl mx-auto space-y-8">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl mb-3 font-extrabold text-primary">
+          <h1 className="text-3xl mb-3 font-extralbold text-primary">
             Featured Foods
           </h1>
           <Button

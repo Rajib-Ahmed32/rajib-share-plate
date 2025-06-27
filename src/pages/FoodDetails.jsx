@@ -80,25 +80,27 @@ const FoodDetails = () => {
   }
 
   return (
-    <Card className="max-w-3xl mx-auto mt-10 p-6 rounded-xl shadow-md space-y-6">
-      <FoodInfo food={singleFood} />
-      <DonorInfo
-        donorName={singleFood.donorName}
-        donorEmail={singleFood.donorEmail}
-        donorImage={singleFood.donorImage}
-        onRequest={() => setShowModal(true)}
-        foodStatus={singleFood.foodStatus}
-      />
-
-      {showModal && (
-        <RequestModal
-          food={singleFood}
-          user={user}
-          onClose={() => setShowModal(false)}
-          onSubmit={handleRequest}
+    <div className="py-8 px-3 md:py-12">
+      <Card className="max-w-3xl mx-auto mt-10 p-6 rounded-xl shadow-md space-y-6">
+        <FoodInfo food={singleFood} />
+        <DonorInfo
+          donorName={singleFood.donorName}
+          donorEmail={singleFood.donorEmail}
+          donorImage={singleFood.donorImage}
+          onRequest={() => setShowModal(true)}
+          foodStatus={singleFood.foodStatus}
         />
-      )}
-    </Card>
+
+        {showModal && (
+          <RequestModal
+            food={singleFood}
+            user={user}
+            onClose={() => setShowModal(false)}
+            onSubmit={handleRequest}
+          />
+        )}
+      </Card>
+    </div>
   );
 };
 

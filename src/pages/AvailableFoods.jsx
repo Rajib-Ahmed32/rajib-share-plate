@@ -49,7 +49,7 @@ export default function AvailableFoods() {
   );
 
   return (
-    <div className="p-8 max-w-7xl mx-auto space-y-8">
+    <div className="py-16 md:py-24 max-w-7xl mx-auto space-y-8">
       <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         <h1 className="text-3xl mb-3 font-extrabold text-primary">
           Available Foods

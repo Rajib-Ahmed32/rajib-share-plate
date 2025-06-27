@@ -69,7 +69,7 @@ export default function AddFood() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-background px-4">
+    <div className="py-16 md:py-24 flex justify-center items-center min-h-screen bg-background px-4">
       <Card className="w-full max-w-4xl shadow-xl bg-card rounded-lg">
         <CardContent className="p-10 space-y-10">
           <h2 className="text-3xl font-bold text-center text-primary">

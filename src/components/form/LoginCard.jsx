@@ -1,4 +1,3 @@
-// src/components/auth/LoginCard.jsx
 import { Card, CardContent } from "../ui/card";
 import { LoginForm } from "../form/LoginForm";
 import { Link } from "react-router-dom";

@@ -15,8 +15,8 @@ export default function FeaturedFoods() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/foods/featured")
-      .then((res) => setFoods(res.data.slice(0, 6)))
+      .get("https://rajibsharedfood-server.onrender.com/api/foods/featured")
+      .then((res) => setFoods(res.data))
       .catch((err) => console.error("Failed to fetch featured foods:", err));
   }, []);
 

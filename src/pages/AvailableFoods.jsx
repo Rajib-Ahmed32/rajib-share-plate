@@ -27,7 +27,7 @@ export default function AvailableFoods() {
     queryKey: ["availableFoods"],
     queryFn: async () => {
       const response = await axios.get(
-        "http://localhost:5000/api/available-foods"
+        "https://rajibsharedfood-server.onrender.com/api/available-foods"
       );
       return response.data;
     },
@@ -99,7 +99,7 @@ export default function AvailableFoods() {
       ) : isError ? (
         <ErrorMessage message="Failed to load available foods." />
       ) : filteredFoods.length === 0 ? (
-        <p className="text-center text-muted-foreground text-lg mt-20">
+        <p className="text-center bg-slate-800 py-5 text-muted-foreground text-lg mt-20">
           No matching foods found.
         </p>
       ) : (

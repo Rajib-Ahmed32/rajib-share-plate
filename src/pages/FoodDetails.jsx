@@ -23,7 +23,7 @@ const FoodDetails = () => {
       try {
         setLoading(true);
         const { data } = await axios.get(
-          `http://localhost:5000/api/foods/${params.id}`,
+          `https://rajibsharedfood-server.onrender.com/api/foods/${params.id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -46,7 +46,7 @@ const FoodDetails = () => {
     try {
       toast.loading("Submitting request...");
       const res = await axios.patch(
-        `http://localhost:5000/api/foods/request/${requestData.foodId}`,
+        `https://rajibsharedfood-server.onrender.com/api/foods/request/${requestData.foodId}`,
         {
           foodStatus: "requested",
           additionalNotes: requestData.additionalNotes,
@@ -80,7 +80,7 @@ const FoodDetails = () => {
   }
 
   return (
-    <div className="py-8 px-3 md:py-12">
+    <div className="py-8 !pb-16 md:!pb-28 px-3 md:py-12">
       <Card className="max-w-3xl mx-auto mt-10 p-6 rounded-xl shadow-md space-y-6">
         <FoodInfo food={singleFood} />
         <DonorInfo

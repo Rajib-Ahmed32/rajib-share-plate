@@ -15,7 +15,7 @@ export default function MyFoodRequests() {
       const token = await getFreshToken();
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/foods/request/me",
+          "https://rajibsharedfood-server.onrender.com/api/foods/request/me",
           {
             headers: {
               Authorization: `Bearer ${token}`,

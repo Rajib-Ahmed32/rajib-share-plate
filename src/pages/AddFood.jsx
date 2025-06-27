@@ -41,7 +41,7 @@ export default function AddFood() {
     try {
       const token = await getFreshToken();
       const response = await axios.post(
-        "http://localhost:5000/api/foods",
+        "https://rajibsharedfood-server.onrender.com/api/foods",
         newFood,
         {
           headers: {

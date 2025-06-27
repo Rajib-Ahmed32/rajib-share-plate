@@ -22,9 +22,11 @@ export default function DesktopNav({ mainMenu, authMenu, user }) {
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
-      await logout();
-      toast.success("Logged out successfully!");
-      navigate("/");
+      navigate("/login", { state: { fromLogout: true } });
+      setTimeout(async () => {
+        await logout();
+        toast.success("Logged out successfully!");
+      }, 100);
     } catch (error) {
       toast.error("Logout failed");
       console.error(error);
@@ -59,9 +61,13 @@ export default function DesktopNav({ mainMenu, authMenu, user }) {
             <Tooltip>
               <TooltipTrigger asChild>
                 <img
-                  src={user.photoURL}
-                  alt={user.displayName}
+                  src={user.photoURL || "/fallback-avatar.avif"}
+                  alt={user.displayName || "Avatar"}
                   className="w-9 h-9 rounded-full border border-white cursor-pointer"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = "/fallback-avatar.avif";
+                  }}
                 />
               </TooltipTrigger>
               <TooltipContent className="text-md">

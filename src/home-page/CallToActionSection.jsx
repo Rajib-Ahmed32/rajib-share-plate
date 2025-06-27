@@ -2,7 +2,7 @@ import { Button } from "../components/ui/button";
 
 export default function CallToActionSection() {
   return (
-    <section className="bg-background py-20 px-6 ">
+    <section className="bg-background py-28 px-6 ">
       <div className="max-w-7xl mx-auto">
         <div className="relative isolate overflow-hidden bg-muted-foreground/50 px-6 py-20 text-center rounded-3xl border border-gray-100 shadow-sm sm:px-16">
           <h2 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-lime-500 ">

@@ -35,10 +35,10 @@ export default function MyFoodRequests() {
   }, []);
 
   if (loading) return <Loading />;
-  if (error) return <p className="text-center p-10 text-red-600">{error}</p>;
+  if (error) return <p className="text-center text-red-600">{error}</p>;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <div className="max-w-7xl mx-auto pb-14 px-4 sm:px-6 lg:px-8 py-12 md:py-16">
       <h1 className="text-3xl font-bold mb-10 text-center text-primary">
         My Food Requests
       </h1>
@@ -46,7 +46,7 @@ export default function MyFoodRequests() {
       {requests.length === 0 ? (
         <NoDataMessage message="You have no food requests yet." />
       ) : (
-        <div className="grid gap-6 grid-cols-1 md:[grid-template-columns:repeat(auto-fill,minmax(450px,1fr))]">
+        <div className="grid gap-6 grid-cols-1 md:[grid-template-columns:repeat(auto-fill,minmax(450px,1fr))] pb-10">
           {requests.map((food) => (
             <RequestCard key={food._id} food={food} />
           ))}

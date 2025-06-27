@@ -12,10 +12,12 @@ import {
   SelectValue,
 } from "../components/ui/select";
 import { Input } from "../components/ui/input";
+import { LayoutGrid, LayoutList } from "lucide-react";
 
 export default function AvailableFoods() {
   const [sortOrder, setSortOrder] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [isThreeColumn, setIsThreeColumn] = useState(true);
 
   const {
     data: availableFoods = [],
@@ -49,7 +51,7 @@ export default function AvailableFoods() {
   );
 
   return (
-    <div className="py-16 md:py-24 max-w-7xl mx-auto space-y-8">
+    <div className="py-16 md:py-24 px-6 max-w-7xl mx-auto space-y-8">
       <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         <h1 className="text-3xl mb-3 font-extrabold text-primary">
           Available Foods
@@ -77,6 +79,18 @@ export default function AvailableFoods() {
               </SelectItem>
             </SelectContent>
           </Select>
+
+          <button
+            onClick={() => setIsThreeColumn((prev) => !prev)}
+            className="hidden md:block p-2 rounded-md border border-input hover:bg-primary/10 transition"
+            title={isThreeColumn ? "Switch to 2-column" : "Switch to 3-column"}
+          >
+            {isThreeColumn ? (
+              <LayoutList className="w-5 h-5 text-white" />
+            ) : (
+              <LayoutGrid className="w-5 h-5 text-white" />
+            )}
+          </button>
         </div>
       </div>
 
@@ -89,7 +103,11 @@ export default function AvailableFoods() {
           No matching foods found.
         </p>
       ) : (
-        <div className="grid gap-10 md:grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))]">
+        <div
+          className={`grid gap-10 pb-10 ${
+            isThreeColumn ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2"
+          }`}
+        >
           {filteredFoods.map((food) => (
             <FoodCard key={food._id} food={food} />
           ))}

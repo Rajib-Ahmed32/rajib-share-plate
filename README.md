@@ -6,10 +6,6 @@ Users can donate food, browse available items, request donations, and manage the
 🔗 **Live Demo:** [https://lambent-strudel-15ddf7.netlify.app](https://lambent-strudel-15ddf7.netlify.app)  
 
 
-## 📸 Screenshot
-![Rajib Share Plate Screenshot](screenshot.png) <!-- Replace with actual image file path -->
-
-
 ## 🚀 Features
 
 ### 🖥️ Frontend
